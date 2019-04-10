@@ -48,7 +48,8 @@ class TwitterClient(object):
 
 
 
-
+        #file input here!!!!1
+        #list of dictionaries formatted like fetched_tweets = [{"tweet":"blah blah blah", "rt": 50, "username":"'}, {"tweet":"blah blah blah", "rt": 50, "username":"'}, ...]
 
         fetched_tweets = ["I can’t believe you had the balls to tweet this. #LiarInChief #ImpeachTrumpNow", "Secure our nations boarder!!!", "We all are waiting for you to go to jail", "The first contracts to support the construction of President Donald Trump's border wall are expected to be awarded this week using Pentagon funds", "Check this out - TRUTH!", "“What’s completely unacceptable is for Congesswoman Omar to target Jews, in this case Stephen Miller.” Jeff Ballabon, B2 Strategic, CEO.  @Varneyco", "On National Former Prisoner of War Recognition Day, we honor the Americans captured and imprisoned by foreign powers while carrying out their duties to defend this great Nation...", "The Mainstream Media has never been more inaccurate or corrupt than it is today. It only seems to get worse. So much Fake News!", "The Democrats will never be satisfied, no matter what they get, how much they get, or how many pages they get. It will never end, but that’s the way life goes!"]
 
