@@ -3,32 +3,12 @@ import re
 #import tweepy 
 #from tweepy import OAuthHandler 
 from textblob import TextBlob 
+import pandas
+import csv
+
 
 class TwitterClient(object): 
-    ''' 
-    Generic Twitter Class for sentiment analysis. 
 
-    def __init__(self): 
-        
-        #Class constructor or initialization method. 
-        
-        # keys and tokens from the Twitter Dev Console 
-        consumer_key = 'XXXXXXXXXXXXXXXXXXXXXXXX'
-        consumer_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-        access_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-        access_token_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXX'
-  
-        # attempt authentication 
-        try: 
-            # create OAuthHandler object 
-            self.auth = OAuthHandler(consumer_key, consumer_secret) 
-            # set access token and secret 
-            self.auth.set_access_token(access_token, access_token_secret) 
-            # create tweepy API object to fetch tweets 
-            self.api = tweepy.API(self.auth) 
-        except: 
-            print("Error: Authentication Failed") 
-  	'''
     def clean_tweet(self, tweet): 
         ''' 
         Utility function to clean tweet text by removing links, special characters 
@@ -56,53 +36,52 @@ class TwitterClient(object):
         return [analysis.polarity, analysis.subjectivity]
 
   
-    def get_tweets(self, query, count = 10): 
+    def get_tweets(self): 
         ''' 
         Main function to fetch tweets and parse them. 
         '''
         # empty list to store parsed tweets 
-        tweets = [] 
-  
-        try: 
-            # call twitter api to fetch tweets 
-            #fetched_tweets = self.api.search(q = query, count = count) 
-            fetched_tweets = ["I can’t believe you had the balls to tweet this. #LiarInChief #ImpeachTrumpNow", "Secure our nations boarder!!!", "We all are waiting for you to go to jail", "The first contracts to support the construction of President Donald Trump's border wall are expected to be awarded this week using Pentagon funds", "Check this out - TRUTH!", "“What’s completely unacceptable is for Congesswoman Omar to target Jews, in this case Stephen Miller.” Jeff Ballabon, B2 Strategic, CEO.  @Varneyco", "On National Former Prisoner of War Recognition Day, we honor the Americans captured and imprisoned by foreign powers while carrying out their duties to defend this great Nation...", "The Mainstream Media has never been more inaccurate or corrupt than it is today. It only seems to get worse. So much Fake News!", "The Democrats will never be satisfied, no matter what they get, how much they get, or how many pages they get. It will never end, but that’s the way life goes!"]
-  
-            # parsing tweets one by one 
-            for tweet in fetched_tweets: 
-                # empty dictionary to store required params of a tweet 
-                parsed_tweet = {} 
-  
-                # saving text of tweet 
-                parsed_tweet['text'] = tweet #tweet.text 
-                # saving sentiment of tweet 
-                parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet) 
+        tweets = pandas.read_csv("a.csv", header = None, delimiter="\t", quoting=csv.QUOTE_NONE, encoding='utf-8')
+        print(tweets.loc[: , "text"])
 
-                tweets.append(parsed_tweet)
   
-                # appending parsed tweet to tweets list 
-                '''
-                if tweet.retweet_count > 0: 
-                    # if tweet has retweets, ensure that it is appended only once 
-                    if parsed_tweet not in tweets: 
+
+
+
+
+
+        fetched_tweets = ["I can’t believe you had the balls to tweet this. #LiarInChief #ImpeachTrumpNow", "Secure our nations boarder!!!", "We all are waiting for you to go to jail", "The first contracts to support the construction of President Donald Trump's border wall are expected to be awarded this week using Pentagon funds", "Check this out - TRUTH!", "“What’s completely unacceptable is for Congesswoman Omar to target Jews, in this case Stephen Miller.” Jeff Ballabon, B2 Strategic, CEO.  @Varneyco", "On National Former Prisoner of War Recognition Day, we honor the Americans captured and imprisoned by foreign powers while carrying out their duties to defend this great Nation...", "The Mainstream Media has never been more inaccurate or corrupt than it is today. It only seems to get worse. So much Fake News!", "The Democrats will never be satisfied, no matter what they get, how much they get, or how many pages they get. It will never end, but that’s the way life goes!"]
+
+
+        # parsing tweets one by one 
+        for tweet in fetched_tweets: 
+            # empty dictionary to store required params of a tweet 
+            parsed_tweet = {} 
+  
+            # saving text of tweet 
+            parsed_tweet['text'] = tweet #tweet.text 
+            # saving sentiment of tweet 
+            parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet) 
+
+  
+            # appending parsed tweet to tweets list 
+            if tweet.retweet_count > 0: 
+                # if tweet has retweets, ensure that it is appended only once 
+                if parsed_tweet not in tweets: 
                         tweets.append(parsed_tweet) 
-                else: 
-                    tweets.append(parsed_tweet) 
-  				'''
+            else: 
+                tweets.append(parsed_tweet) 
   				
 
             # return parsed tweets 
             return tweets 
   
-        except tweepy.TweepError as e: 
-            # print error (if any) 
-            print("Error : " + str(e)) 
   
 def main(): 
     # creating object of TwitterClient Class 
     api = TwitterClient() 
     # calling function to get tweets 
-    tweets = api.get_tweets(query = 'Donald Trump', count = 200) 
+    tweets = api.get_tweets() 
 
     print ('polarity:  ', 'subjectivity:  ', 'text:')
     for tweet in tweets:
