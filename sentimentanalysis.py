@@ -31,9 +31,10 @@ def get_tweets():
     '''
 
     # empty list to store parsed tweets
-    df = pandas.read_csv("tweets.csv", na_values={'user_verified':False}, dtype={'time':str, 'user_screen_name':str, 'text':str, 'tweet_type':str, 'hashtags':str, 'retweet_count':float, 'user_description':str, 'user_followers_count':float, 'user_friends_count':float, 'user_statuses_count':float, 'user_verified':str})
-    #original_tweets = pandas.read_csv("a.csv", header = None, delimiter="\t", quoting=csv.QUOTE_NONE, encoding='utf-8')
-    df.fillna({'user_verified':False})
+    #df = pandas.read_csv(tweets.csv",  na_values={'user_verified':False}, dtype={'time':str, 'user_screen_name':str, 'text':str, 'tweet_type':str, 'hashtags':str, 'retweet_count':float, 'user_description':str, 'user_followers_count':float, 'user_friends_count':float, 'user_statuses_count':float, 'user_verified':str})
+    df = pandas.read_csv("trump-tweets.csv", dtype={'time':str, 'user_screen_name':str, 'text':str, 'tweet_type':str, 'hashtags':str, 'retweet_count':float, 'user_description':str, 'user_followers_count':float, 'user_friends_count':float, 'user_statuses_count':float, 'user_verified':str})
+
+    #df.fillna({'user_verified':False})
     original_tweets = df.to_dict('records')
 
     # list of dictionaries formatted like fetched_tweets = [{"text":"blah blah blah", "rt": 50, "username":"'}, {"text":"blah blah blah", "rt": 50, "username":"'}, ...]
@@ -69,7 +70,7 @@ def main():
 
     print('\nexported to csv ;)')
     df = pandas.DataFrame(tweets)
-    df.to_csv('output.csv')
+    df.to_csv('trump-output.csv')
 
 
 
