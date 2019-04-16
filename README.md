@@ -14,10 +14,10 @@ Two sets of Tweets were analyzed for subjectivity and polarized language:
 ## What did we find?
 
 * We demonstrated the use of computer algorithms in natural language processing as effective in measuring elements of rhetoric.
-* We quantified the high levels of rhetoric in modern politics by pairing it with Aristotle’s modes of persuasion
-* We witnessed high levels of usage of pathos and ethos via emotional polarization and subjectivity to manipulate and convince voters
+* We quantified the high levels of rhetoric in modern politics by pairing it with Aristotle’s modes of persuasion.
+* We witnessed high levels of usage of pathos and ethos via emotional polarization and subjectivity to manipulate and convince voters.
 
-Our complete analysis, along with all figures, can be found here: bit.ly/TwitterRhetoric
+Our complete analysis, along with all figures, can be found here: [bit.ly/TwitterRhetoric](https://bit.ly/TwitterRhetoric)
 
 ## Built Using
 
