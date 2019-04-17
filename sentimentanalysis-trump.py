@@ -21,12 +21,11 @@ def get_tweets():
     '''
 
     # empty list to store parsed tweets
-    df = pandas.read_csv("exportTweets.csv", na_values={'user_verified': False},
+    df = pandas.read_csv("trump-tweets.csv", na_values={'user_verified': False},
                          dtype={'source': str, 'text': str, 'created_at': str, 'retweet_count': str, 'favorite_count': str,'is_retweet': str})
     original_tweets = df.to_dict('records')
 
     # list of dictionaries formatted like fetched_tweets = [{"text":"blah blah blah", "rt": 50, "username":"'}, {"text":"blah blah blah", "rt": 50, "username":"'}, ...]
-    print("hello")
     tweets = []
     # parsing tweets one by one
     for tweet in original_tweets:
@@ -44,7 +43,7 @@ def main():
 
     print('\nexported to csv ;)')
     df = pandas.DataFrame(tweets)
-    df.to_csv('output.csv')
+    df.to_csv('trump-output.csv')
 
 
 if __name__ == "__main__":
